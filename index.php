@@ -20,6 +20,9 @@ $categoryNames = [
 ];
 
 $categoryFilter = isset($_GET['category']) ? $_GET['category'] : '';
+$isHomeActive = $categoryFilter === '';
+$isNewsActive = $categoryFilter === 'news' || strpos($categoryFilter, 'news-') === 0;
+$isEditorialActive = $categoryFilter === 'editorial' || strpos($categoryFilter, 'editorial-') === 0;
 
 if ($categoryFilter != '') {
     $stmt = $conn->prepare("SELECT * FROM news WHERE category=? ORDER BY created_at DESC");
@@ -72,29 +75,29 @@ $result = $stmt->get_result();
 <nav class="nav-bar">
   <div class="nav-container">
     <ul class="nav">
-      <li><a href="index.php" class="active">Home</a></li>
+      <li><a href="index.php" class="<?= $isHomeActive ? 'active' : '' ?>">Home</a></li>
       <li class="dropdown">
-        <a href="index.php?category=news">News</a>
+        <a href="index.php?category=news" class="<?= $isNewsActive ? 'active' : '' ?>">News</a>
         <div class="dropdown-content">
-          <a href="index.php?category=news-campus">Campus</a>
-          <a href="index.php?category=news-sports">Sports</a>
-          <a href="index.php?category=news-scitech">Science & Technology</a>
-          <a href="index.php?category=news-local">Local</a>
-          <a href="index.php?category=news-foreign">Foreign</a>
+          <a href="index.php?category=news-campus" class="<?= $categoryFilter === 'news-campus' ? 'active' : '' ?>">Campus</a>
+          <a href="index.php?category=news-sports" class="<?= $categoryFilter === 'news-sports' ? 'active' : '' ?>">Sports</a>
+          <a href="index.php?category=news-scitech" class="<?= $categoryFilter === 'news-scitech' ? 'active' : '' ?>">Science & Technology</a>
+          <a href="index.php?category=news-local" class="<?= $categoryFilter === 'news-local' ? 'active' : '' ?>">Local</a>
+          <a href="index.php?category=news-foreign" class="<?= $categoryFilter === 'news-foreign' ? 'active' : '' ?>">Foreign</a>
         </div>
       </li>
-      <li><a href="index.php?category=feature">Feature</a></li>
+      <li><a href="index.php?category=feature" class="<?= $categoryFilter === 'feature' ? 'active' : '' ?>">Feature</a></li>
       <li class="dropdown">
-        <a href="index.php?category=editorial">Editorial</a>
+        <a href="index.php?category=editorial" class="<?= $isEditorialActive ? 'active' : '' ?>">Editorial</a>
         <div class="dropdown-content">
-          <a href="index.php?category=editorial-cartooning">Cartooning</a>
-          <a href="index.php?category=editorial-article">Article</a>
+          <a href="index.php?category=editorial-cartooning" class="<?= $categoryFilter === 'editorial-cartooning' ? 'active' : '' ?>">Cartooning</a>
+          <a href="index.php?category=editorial-article" class="<?= $categoryFilter === 'editorial-article' ? 'active' : '' ?>">Article</a>
         </div>
       </li>
-      <li><a href="index.php?category=column">Column</a></li>
-      <li><a href="index.php?category=photojournalism">Photojournalism</a></li>
-      <li><a href="index.php?category=broadcast">Broadcast Media</a></li>
-      <li><a href="index.php?category=literary">Literary</a></li>
+      <li><a href="index.php?category=column" class="<?= $categoryFilter === 'column' ? 'active' : '' ?>">Column</a></li>
+      <li><a href="index.php?category=photojournalism" class="<?= $categoryFilter === 'photojournalism' ? 'active' : '' ?>">Photojournalism</a></li>
+      <li><a href="index.php?category=broadcast" class="<?= $categoryFilter === 'broadcast' ? 'active' : '' ?>">Broadcast Media</a></li>
+      <li><a href="index.php?category=literary" class="<?= $categoryFilter === 'literary' ? 'active' : '' ?>">Literary</a></li>
     </ul>
   </div>
 </nav>
