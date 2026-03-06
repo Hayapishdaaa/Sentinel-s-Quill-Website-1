@@ -20,6 +20,9 @@ $categoryNames = [
 ];
 
 $categoryFilter = isset($_GET['category']) ? $_GET['category'] : '';
+$isHomeActive = $categoryFilter === '';
+$isNewsActive = $categoryFilter === 'news' || strpos($categoryFilter, 'news-') === 0;
+$isEditorialActive = $categoryFilter === 'editorial' || strpos($categoryFilter, 'editorial-') === 0;
 
 if ($categoryFilter != '') {
     $stmt = $conn->prepare("SELECT * FROM news WHERE category=? ORDER BY created_at DESC");
@@ -42,32 +45,27 @@ $result = $stmt->get_result();
 <link rel="stylesheet" href="css/buttons.css">
 </head>
 <body>
-
 <header class="header">
   <div class="header-container" style="position: relative;">
     <div class="header-top">
       <img src="new-school-logo.png" alt="Army's Angels Integrated School" class="logo">
-
       <?php if (isset($_SESSION['username'])): ?>
           <span id="username-display"><?= htmlspecialchars($_SESSION['username']) ?></span>
           <button id="logout-btn" onclick="window.location.href='logout.php'">Sign Out</button>
       <?php else: ?>
-          <button id="login-btn" onclick="window.location.href='login.php'">Login / Signup</button>
+          <button id="login-btn" onclick="window.location.href='login.php'">Login</button>
       <?php endif; ?>
-
       <div class="site-title">
           <h1>The Sentinel's Quill</h1>
           <p>Army's Angels Integrated School Campus Journalism</p>
       </div>
       <img src="journalism-logo.png" alt="The Sentinel's Quill" class="logo">
     </div>
-
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
       <button id="admin-btn" onclick="window.location.href='admin.php'" style="display:block;">Admin Panel</button>
     <?php endif; ?>
   </div>
 </header>
-
 <nav class="nav-bar">
   <div class="nav-container">
     <ul class="nav">
@@ -97,13 +95,11 @@ $result = $stmt->get_result();
     </ul>
   </div>
 </nav>
-
 <div class="container">
   <?php
     $displayCategory = $categoryFilter != '' ? $categoryNames[$categoryFilter] : 'Latest Updates';
     echo '<h2 class="page-title">' . $displayCategory . '</h2>';
   ?>
-
   <div id="news-feed" class="news-feed">
     <?php
     if ($result->num_rows > 0) {
@@ -123,10 +119,8 @@ $result = $stmt->get_result();
     ?>
   </div>
 </div>
-
 <footer class="footer">
   <p>&copy; 2026 The Sentinel's Quill - Army's Angels Integrated School</p>
 </footer>
-
 </body>
 </html>

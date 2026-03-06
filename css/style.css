@@ -106,9 +106,12 @@ body {
 .nav {
   list-style: none;
   display: flex;
-  justify-content: center;
+ 
+  justify-content: space-evenly;
+  
   flex-wrap: wrap;
-  gap: 0;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
 }
 
 .nav > li {
@@ -117,11 +120,11 @@ body {
 
 .nav > li > a {
   display: block;
-  padding: 1rem 1.5rem;
+  padding: 1rem 0.9rem;
   color: var(--primary-green);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
@@ -149,6 +152,7 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   z-index: 1000;
   border-radius: 0 0 5px 5px;
+  white-space: nowrap;
 }
 
 .dropdown:hover .dropdown-content {
@@ -195,6 +199,7 @@ body {
 .news-feed {
   display: grid;
   gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .article-card {
@@ -358,11 +363,18 @@ body {
   }
   
   .nav {
+    display: flex;
     flex-direction: column;
+    gap: 0;
+  }
+  
+  .nav > li {
+    width: 100%;
   }
   
   .nav > li > a {
     padding: 0.75rem 1rem;
+    font-size: 0.9rem;
   }
   
   .dropdown-content {

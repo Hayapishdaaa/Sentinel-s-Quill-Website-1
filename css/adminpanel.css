@@ -14,8 +14,6 @@
 .back-link:hover { text-decoration: underline; }
 .admin-link { display: inline-block; margin-left: 0.75rem; color: var(--primary-green); text-decoration: none; font-weight: bold; }
 .admin-link:hover { text-decoration: underline; }
-
-
 .article-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
 .article-table th, .article-table td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; }
 .article-table th { background: var(--primary-green); color: white; }
