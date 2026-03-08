@@ -23,8 +23,6 @@ This website was created as a **school project** to:
 * 📱 Responsive Layout for Mobile and Desktop
 * 🎨 Clean and Simple Campus Journalism Design
 
-*(No login system or database yet – planned for future updates.)*
-
 ## 🛠 Technologies Used
 
 * **HTML**
