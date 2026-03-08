@@ -34,9 +34,7 @@ This website was created as a **school project** to:
 
 Future plans:
 
-* PHP or Node.js backend
-* MySQL or Firebase database
-* Admin dashboard for editors
+* Mobile App version
 
 ## 📂 Project Structure (Example)
 
